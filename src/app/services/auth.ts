@@ -26,5 +26,14 @@ export class Auth {
   logout() {
     localStorage.removeItem("token");
   }
+
+  guardarUsuario(usuario: any){
+    localStorage.setItem("usuario", JSON.stringify(usuario));
+  }
+
+  obtenerUsuario() {
+    const data = localStorage.getItem("usuario");
+    return data ? JSON.parse(data) : null;
+  }
   
 }

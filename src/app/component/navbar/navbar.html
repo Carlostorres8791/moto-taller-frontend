@@ -1,1 +1,64 @@
-<p>navbar works!</p>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container-fluid">
+
+    <div class="collapse navbar-collapse">
+
+      <ul class="navbar-nav me-auto">
+
+        <li class="nav-item">
+          <a class="navbar-brand" routerLink="/dashboard">S.P.A.R.K</a>
+        </li>
+
+        <!-- SUPER ADMIN -->
+        <ng-container *ngIf="usuario?.rol === 'SUPER_ADMIN'">
+
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/talleres">
+              Talleres
+            </a>
+          </li>
+
+        </ng-container>
+
+        <!-- ADMIN TALLER -->
+        <ng-container *ngIf="usuario?.rol === 'ADMIN_TALLER'">
+
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/ordenes">
+              Ordenes
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/tecnicos">
+              Tecnicos
+            </a>
+          </li>
+
+        </ng-container>
+
+        <!-- TECNICO -->
+        <ng-container *ngIf="usuario?.rol === 'TECNICO'">
+
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/mis-ordenes">
+              Mis Ordenes
+            </a>
+          </li>
+
+        </ng-container>
+
+      </ul>
+
+      <span class="navbar-text me-3">
+        {{usuario?.nombre}}
+      </span>
+
+      <button class="btn btn-light btn-sm" (click)="logout()">
+        Salir
+      </button>
+
+    </div>
+
+  </div>
+</nav>

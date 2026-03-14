@@ -32,6 +32,8 @@ export class Login {
 
         this.authService.guardarToken(token);
 
+        this.authService.guardarUsuario(response);
+
         this.router.navigate(['/dashboard']); 
       },
       error: (error) => {
