@@ -1,0 +1,37 @@
+<div class="container mt-4">
+
+<h2>Registrar Talle</h2>
+
+<form (ngSubmit)="crearTaller()">
+
+  <div class="mb-3">
+    <label>Nombre del taller</label>
+    <input type="text" class="form-control" [(ngModel)]="taller.nombre" name="nombre">
+  </div>
+
+  <div class="mb-3">
+    <label>Dirección</label>
+    <input type="text" class="form-control" [(ngModel)]="taller.direccion" name="direccion">
+  </div>
+
+  <hr>
+
+  <h4>Administrador</h4>
+
+  <div class="mb-3">
+    <label>Nombre</label>
+    <input type="text" class="form-control" [(ngModel)]="admin.nombre" name="adminNombre">
+  </div>
+
+  <div class="mb-3">
+    <label>Email</label>
+    <input type="email" class="form-control" [(ngModel)]="admin.email" name="adminEmail">
+  </div>
+
+  <button class="btn btn-success">
+    Crear Taller
+  </button>
+
+</form>
+
+</div>

@@ -1,10 +1,149 @@
 <app-navbar></app-navbar>
 
 <div class="container mt-4">
+  <h4 class="mb-4">Bienvenido {{ usuario?.nombre }}</h4>
 
-<a>Bienvenido {{usuario?.nombre}}</a>
-<a> {{usuario?.rol}}</a>
-<a> {{usuario?.tallerId}}</a>
-<a> {{usuario | json}}</a>
+  <div class="container mt-4">
+    <h2>Panel Super Admin</h2>
 
+    <div class="row mt-4">
+      <div class="col-md-4">
+        <div class="card shadow">
+          <div class="card-body text-center">
+            <h5 class="card-title">Crear Taller</h5>
+            <p class="card-text">Registrar un nuevo taller con su administrador</p>
+
+            <a routerLink="crear-taller" class="btn btn-primary"> Crear Taller </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARDS -->
+  <div class="row g-3 mb-4">
+    <div class="col-12 col-md-4">
+      <div class="card shadow-sm dashboard-card">
+        <div class="card-body">
+          <h6 class="text-muted">Talleres Registrados</h6>
+          <h2 class="fw-bold">42</h2>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-md-4">
+      <div class="card shadow-sm dashboard-card">
+        <div class="card-body">
+          <h6 class="text-muted">Talleres Activos</h6>
+          <h2 class="fw-bold text-success">35</h2>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-12 col-md-4">
+      <div class="card shadow-sm dashboard-card">
+        <div class="card-body">
+          <h6 class="text-muted">Talleres Desactivados</h6>
+          <h2 class="fw-bold text-danger">7</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TABLAS -->
+  <div class="row g-4">
+    <!-- MAS ACTIVOS -->
+    <div class="col-12 col-lg-6">
+      <div class="card shadow-sm">
+        <div class="card-header fw-semibold">Talleres Más Activos</div>
+
+        <div class="table-responsive">
+          <table class="table table-hover mb-0">
+            <thead>
+              <tr>
+                <th>Taller</th>
+                <th>Ciudad</th>
+                <th>Ordenes</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td>MotoFix</td>
+                <td>Bogotá</td>
+                <td>120</td>
+              </tr>
+
+              <tr>
+                <td>SpeedMoto</td>
+                <td>Medellín</td>
+                <td>95</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- MENOS ACTIVOS -->
+    <div class="col-12 col-lg-6">
+      <div class="card shadow-sm">
+        <div class="card-header fw-semibold">Talleres Menos Activos</div>
+
+        <div class="table-responsive">
+          <table class="table table-hover mb-0">
+            <thead>
+              <tr>
+                <th>Taller</th>
+                <th>Ciudad</th>
+                <th>Ordenes</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td>Moto Norte</td>
+                <td>Pasto</td>
+                <td>2</td>
+              </tr>
+
+              <tr>
+                <td>MotoBike</td>
+                <td>Cali</td>
+                <td>0</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DESACTIVADOS -->
+
+  <div class="card shadow-sm mt-4">
+    <div class="card-header fw-semibold">Talleres Desactivados</div>
+
+    <div class="table-responsive">
+      <table class="table table-hover mb-0">
+        <thead>
+          <tr>
+            <th>Taller</th>
+            <th>Ciudad</th>
+            <th>Fecha</th>
+            <th>Días inactivo</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>MotoFast</td>
+            <td>Cali</td>
+            <td>10 Feb</td>
+            <td>32</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
