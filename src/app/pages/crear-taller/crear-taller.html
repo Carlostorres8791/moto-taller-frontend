@@ -1,37 +1,47 @@
+<app-navbar></app-navbar>
+
 <div class="container mt-4">
+  <h2>Registrar Nuevo Taller</h2>
+  <h3>Ingresa los datos del nuevo Taller</h3>
 
-<h2>Registrar Talle</h2>
+  <form (ngSubmit)="crearTaller()">
+    <div class="mb-3">
+      <label>Nombre del taller</label>
+      <input type="text" class="form-control" [(ngModel)]="request.nombreTaller" name="nombre" />
+    </div>
 
-<form (ngSubmit)="crearTaller()">
+    <div class="mb-3">
+      <label>Dirección</label>
+      <input type="text" class="form-control" [(ngModel)]="request.direccion" name="direccion" />
+    </div>
 
-  <div class="mb-3">
-    <label>Nombre del taller</label>
-    <input type="text" class="form-control" [(ngModel)]="taller.nombre" name="nombre">
-  </div>
+    <div class="mb-3">
+      <label>Teléfono</label>
+      <input type="text" class="form-control" [(ngModel)]="request.telefono" name="telefono">
+    </div>
 
-  <div class="mb-3">
-    <label>Dirección</label>
-    <input type="text" class="form-control" [(ngModel)]="taller.direccion" name="direccion">
-  </div>
+    <hr />
 
-  <hr>
+    <h2>Registro del Administrador</h2>
+    <h3>Ingresa los datos del administrador del taller</h3>
 
-  <h4>Administrador</h4>
+    <div class="mb-3">
+      <label>Nombre del Administrador</label>
+      <input type="text" class="form-control" [(ngModel)]="request.nombreAdmin" name="nombreAdmin"/>
+    </div>
 
-  <div class="mb-3">
-    <label>Nombre</label>
-    <input type="text" class="form-control" [(ngModel)]="admin.nombre" name="adminNombre">
-  </div>
+    <div class="mb-3">
+      <label>Email del Administrador</label>
+      <input type="email" class="form-control" [(ngModel)]="request.emailAdmin" name="emailAdmin"/>
+    </div>
 
-  <div class="mb-3">
-    <label>Email</label>
-    <input type="email" class="form-control" [(ngModel)]="admin.email" name="adminEmail">
-  </div>
+    <div class="mb-3">
+      <label>Contraseña</label>
+      <input type="text" class="form-control" [(ngModel)]="request.passwordAdmin" name="passwordAdmin">
+    </div>
 
-  <button class="btn btn-success">
-    Crear Taller
-  </button>
-
-</form>
-
+    <button class="btn btn-success w-100" [disabled]="">Crear Taller</button>
+    <hr>
+    <button class="btn btn-primary w-100" routerLink="/dashboard">Salir</button>
+  </form>
 </div>

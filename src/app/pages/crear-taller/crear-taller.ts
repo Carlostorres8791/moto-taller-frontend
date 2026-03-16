@@ -2,43 +2,40 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Taller } from '../../services/taller';
+import { Navbar } from '../../component/navbar/navbar';
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-crear-taller',
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, Navbar, RouterLink],
   templateUrl: './crear-taller.html',
   styleUrl: './crear-taller.css',
 })
 export class CrearTaller {
-
-  taller = {
-    nombre: '',
-    direccion: ''
-  };
-
-  admin = {
-    nombre: '',
-    email: ''
+  
+  request = {
+    nombreTaller: '',
+    direccion: '',
+    telefono: '',
+    nombreAdmin: '',
+    emailAdmin: '',
+    passwordAdmin: ''
   };
 
   constructor(private tallerService: Taller) {}
 
   crearTaller(){
 
-    const request = {
-    nombre: this.taller.nombre,
-    direccion: this.taller.direccion,
-    adminNombre: this.admin.nombre,
-    adminEmail: this.admin.email};
-
- this.tallerService.crearTaller(request).subscribe({
+    this.tallerService.crearTaller(this.request).subscribe({
+      
       next: (res)=>{
         alert("Taller creado correctamente");
       },
-      error: (err)=>{
-        console.log(err);
-      }
-    });
 
+      error: (err)=> {
+        console.log(err);        
+      }
+
+    });    
   }
 }

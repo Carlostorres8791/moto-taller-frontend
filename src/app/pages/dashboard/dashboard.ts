@@ -4,9 +4,10 @@ import { Navbar } from "../../component/navbar/navbar";
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
+
 @Component({
   selector: 'app-dashboard',
-  imports: [Navbar, CommonModule],
+  imports: [Navbar, CommonModule, RouterModule],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
 })
