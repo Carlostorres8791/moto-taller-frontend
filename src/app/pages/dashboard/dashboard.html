@@ -1,29 +1,27 @@
 <app-navbar></app-navbar>
 
 <div class="container mt-4">
-  <h4 class="mb-4">Bienvenido {{ usuario?.nombre }}</h4>
 
-  <div class="container mt-4">
-    <h2>Panel Super Admin</h2>
-
-    <div class="row mt-4">
-      <div class="col-md-4">
-        <div class="card shadow">
-          <div class="card-body text-center">
-            <h5 class="card-title">Crear Taller</h5>
-            <p class="card-text">Registrar un nuevo taller con su administrador</p>
-
-            <a routerLink="/crear-taller" class="btn btn-primary"> Crear Taller </a>
-          </div>
-        </div>
-      </div>
+  <!-- HEADER -->
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+      <h4 class="mb-1">Bienvenido, {{ usuario?.nombre }}</h4>
+      <small class="text-muted">Panel de control general</small>
     </div>
+
+    <a routerLink="/crear-taller" class="btn btn-primary">
+      + Crear Taller
+    </a>
+    <a routerLink="/listar-talleres" class="btn btn-outline-dark">
+    📋 Ver Talleres
+  </a>
   </div>
 
-  <!-- CARDS -->
+  <!-- KPIs -->
   <div class="row g-3 mb-4">
+
     <div class="col-12 col-md-4">
-      <div class="card shadow-sm dashboard-card">
+      <div class="card shadow-sm border-0">
         <div class="card-body">
           <h6 class="text-muted">Talleres Registrados</h6>
           <h2 class="fw-bold">42</h2>
@@ -32,7 +30,7 @@
     </div>
 
     <div class="col-12 col-md-4">
-      <div class="card shadow-sm dashboard-card">
+      <div class="card shadow-sm border-0">
         <div class="card-body">
           <h6 class="text-muted">Talleres Activos</h6>
           <h2 class="fw-bold text-success">35</h2>
@@ -41,29 +39,33 @@
     </div>
 
     <div class="col-12 col-md-4">
-      <div class="card shadow-sm dashboard-card">
+      <div class="card shadow-sm border-0">
         <div class="card-body">
           <h6 class="text-muted">Talleres Desactivados</h6>
           <h2 class="fw-bold text-danger">7</h2>
         </div>
       </div>
     </div>
+
   </div>
 
-  <!-- TABLAS -->
+  <!-- TABLAS PRINCIPALES -->
   <div class="row g-4">
-    <!-- MAS ACTIVOS -->
+
+    <!-- MÁS ACTIVOS -->
     <div class="col-12 col-lg-6">
-      <div class="card shadow-sm">
-        <div class="card-header fw-semibold">Talleres Más Activos</div>
+      <div class="card shadow-sm border-0">
+        <div class="card-header bg-white fw-semibold">
+          🚀 Talleres Más Activos
+        </div>
 
         <div class="table-responsive">
-          <table class="table table-hover mb-0">
-            <thead>
+          <table class="table table-hover align-middle mb-0">
+            <thead class="table-light">
               <tr>
                 <th>Taller</th>
                 <th>Ciudad</th>
-                <th>Ordenes</th>
+                <th>Órdenes</th>
               </tr>
             </thead>
 
@@ -71,13 +73,13 @@
               <tr>
                 <td>MotoFix</td>
                 <td>Bogotá</td>
-                <td>120</td>
+                <td><span class="badge bg-success">120</span></td>
               </tr>
 
               <tr>
                 <td>SpeedMoto</td>
                 <td>Medellín</td>
-                <td>95</td>
+                <td><span class="badge bg-success">95</span></td>
               </tr>
             </tbody>
           </table>
@@ -87,16 +89,18 @@
 
     <!-- MENOS ACTIVOS -->
     <div class="col-12 col-lg-6">
-      <div class="card shadow-sm">
-        <div class="card-header fw-semibold">Talleres Menos Activos</div>
+      <div class="card shadow-sm border-0">
+        <div class="card-header bg-white fw-semibold">
+          ⚠️ Talleres Menos Activos
+        </div>
 
         <div class="table-responsive">
-          <table class="table table-hover mb-0">
-            <thead>
+          <table class="table table-hover align-middle mb-0">
+            <thead class="table-light">
               <tr>
                 <th>Taller</th>
                 <th>Ciudad</th>
-                <th>Ordenes</th>
+                <th>Órdenes</th>
               </tr>
             </thead>
 
@@ -104,29 +108,31 @@
               <tr>
                 <td>Moto Norte</td>
                 <td>Pasto</td>
-                <td>2</td>
+                <td><span class="badge bg-warning text-dark">2</span></td>
               </tr>
 
               <tr>
                 <td>MotoBike</td>
                 <td>Cali</td>
-                <td>0</td>
+                <td><span class="badge bg-danger">0</span></td>
               </tr>
             </tbody>
           </table>
         </div>
       </div>
     </div>
+
   </div>
 
   <!-- DESACTIVADOS -->
-
-  <div class="card shadow-sm mt-4">
-    <div class="card-header fw-semibold">Talleres Desactivados</div>
+  <div class="card shadow-sm border-0 mt-4">
+    <div class="card-header bg-white fw-semibold">
+      🛑 Talleres Desactivados
+    </div>
 
     <div class="table-responsive">
-      <table class="table table-hover mb-0">
-        <thead>
+      <table class="table table-hover align-middle mb-0">
+        <thead class="table-light">
           <tr>
             <th>Taller</th>
             <th>Ciudad</th>
@@ -140,10 +146,11 @@
             <td>MotoFast</td>
             <td>Cali</td>
             <td>10 Feb</td>
-            <td>32</td>
+            <td><span class="badge bg-danger">32 días</span></td>
           </tr>
         </tbody>
       </table>
     </div>
   </div>
+
 </div>

@@ -24,4 +24,14 @@ export class Taller {
     return this.http.post(`${this.apiUrl}`, data, {headers});
 
   }
+
+  obtenerTalleres() {
+    const token = this.auth.obtenerToken();
+
+    const headers = new HttpHeaders({
+      Authorization : `Bearer ${token}`
+    });
+
+    return this.http.get<any[]>(`${this.apiUrl}`, {headers});
+  }
 }

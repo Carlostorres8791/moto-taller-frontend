@@ -4,20 +4,27 @@
   <h2>Registrar Nuevo Taller</h2>
   <h3>Ingresa los datos del nuevo Taller</h3>
 
-  <form (ngSubmit)="crearTaller()">
+  <form [formGroup]="form" (ngSubmit)="crearTaller()">
     <div class="mb-3">
       <label>Nombre del taller</label>
-      <input type="text" class="form-control" [(ngModel)]="request.nombreTaller" name="nombre" />
+      <input type="text" class="form-control" formControlName="nombreTaller"/>
+      <div *ngIf="campoInvalido('nombreTaller')" class="text-danger">El nombre debe de tener al menos 3 caracteres</div>
     </div>
 
     <div class="mb-3">
       <label>Dirección</label>
-      <input type="text" class="form-control" [(ngModel)]="request.direccion" name="direccion" />
+      <input type="text" class="form-control" formControlName="direccion"/>
+
+      <div *ngIf="campoInvalido('direccion')" class="text-danger">la direccion es obligatoria (mínimo 5 carcateres)</div>
     </div>
 
     <div class="mb-3">
       <label>Teléfono</label>
-      <input type="text" class="form-control" [(ngModel)]="request.telefono" name="telefono">
+      <input type="text" class="form-control" formControlName="telefono"/>
+
+      <div *ngIf="campoInvalido('telefono')" class="text-danger">
+        el teléfono debe de tener 10 dígitos
+      </div>
     </div>
 
     <hr />
@@ -27,20 +34,35 @@
 
     <div class="mb-3">
       <label>Nombre del Administrador</label>
-      <input type="text" class="form-control" [(ngModel)]="request.nombreAdmin" name="nombreAdmin"/>
+      <input type="text" class="form-control" formControlName="nombreAdmin" />
+      <div *ngIf="campoInvalido('nombreAdmin')" class="text-danger">
+        Nombre Invalido
+      </div>
     </div>
 
     <div class="mb-3">
       <label>Email del Administrador</label>
-      <input type="email" class="form-control" [(ngModel)]="request.emailAdmin" name="emailAdmin"/>
+      <input type="email" class="form-control" formControlName="emailAdmin" />
+      <div *ngIf="campoInvalido('emailAdmin')"  class="text-danger">
+        Email Invalido
+      </div>
     </div>
 
     <div class="mb-3">
       <label>Contraseña</label>
-      <input type="text" class="form-control" [(ngModel)]="request.passwordAdmin" name="passwordAdmin">
+      <input type="text" class="form-control" formControlName="passwordAdmin" />
+      <div *ngIf="campoInvalido('passwordAdmin')" class="text-danger">
+        Mínimo 6 caracteres
+      </div>
     </div>
 
-    <button class="btn btn-success w-100" [disabled]="">Crear Taller</button>
+    <div *ngIf="errorMessage" class="alert alert-danger">
+      {{ errorMessage }}
+    </div>
+
+    <button class="btn btn-success w-100" type="submit" [disabled]="form.invalid || loading">
+      {{ loading ? 'Creando...' : 'Crear Taller' }}
+    </button>
     <hr>
     <button class="btn btn-primary w-100" routerLink="/dashboard">Salir</button>
   </form>
