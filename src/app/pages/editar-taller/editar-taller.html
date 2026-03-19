@@ -1,0 +1,71 @@
+<app-navbar></app-navbar>
+
+<div class="container py-4">
+  <div class="card shadow border-0">
+
+    <div class="card-header bg-warning text-dark">
+      <h4 class="mb-0">Editar Taller</h4>
+      <small>Actualiza la información del taller y su administrador</small>
+    </div>
+
+    <div class="card-body">
+
+      <form [formGroup]="form" (ngSubmit)="actualizarTaller()">
+
+        <!-- TALLER -->
+        <h5 class="mb-3">🏭 Datos del Taller</h5>
+
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label>Nombre</label>
+            <input class="form-control" formControlName="nombreTaller">
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label>Teléfono</label>
+            <input class="form-control" formControlName="telefono">
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label>Dirección</label>
+          <input class="form-control" formControlName="direccion">
+        </div>
+
+        <hr>
+
+        <!-- ADMIN -->
+        <h5 class="mb-3">👤 Administrador</h5>
+
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label>Nombre</label>
+            <input class="form-control" formControlName="nombreAdmin">
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label>Email</label>
+            <input class="form-control" formControlName="emailAdmin">
+          </div>
+        </div>
+
+        <!-- ERROR -->
+        <div *ngIf="errorMessage" class="alert alert-danger">
+          {{ errorMessage }}
+        </div>
+
+        <div class="d-flex gap-2 mt-3">
+          <button class="btn btn-warning w-100" type="submit">
+            Actualizar Taller
+          </button>
+
+          <button class="btn btn-outline-secondary w-100" routerLink="/listar-talleres">
+            Volver
+          </button>
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+</div>
