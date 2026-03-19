@@ -1,0 +1,11 @@
+.kpi-card {
+  transition: all 0.2s ease;
+}
+
+.kpi-card:hover {
+  transform: translateY(-4px);
+}
+
+.table td, .table th {
+  vertical-align: middle;
+}

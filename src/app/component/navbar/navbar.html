@@ -1,73 +1,95 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm px-3 py-2">
   <div class="container-fluid">
 
-    <a class="navbar-brand fw-bold" routerLink="/dashboard">
-      S.P.A.R.K
+    <!-- LOGO -->
+    <a class="navbar-brand fw-bold d-flex align-items-center gap-2" routerLink="/dashboard">
+      <div class="bg-white text-primary rounded-circle d-flex align-items-center justify-content-center" 
+           style="width: 32px; height: 32px;">
+        <i class="bi bi-lightning-fill"></i>
+      </div>
+      <span>S.P.A.R.K</span>
     </a>
 
     <!-- BOTON MOVIL -->
     <button 
-      class="navbar-toggler" 
+      class="navbar-toggler border-0" 
       type="button" 
       data-bs-toggle="collapse" 
       data-bs-target="#navbarContent">
-
       <span class="navbar-toggler-icon"></span>
-
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarContent">
+    <div class="collapse navbar-collapse mt-3 mt-lg-0" id="navbarContent">
 
-      <ul class="navbar-nav me-auto">
+      <!-- MENÚ -->
+      <ul class="navbar-nav me-auto gap-lg-2">
 
-        <!-- SUPER ADMIN -->
         <ng-container *ngIf="usuario?.rol === 'SUPER_ADMIN'">
-
           <li class="nav-item">
-            <a class="nav-link" routerLink="/talleres">
-              Talleres
+            <a class="nav-link nav-link-custom" routerLink="/talleres" routerLinkActive="active">
+              <i class="bi bi-shop me-1"></i> Talleres
             </a>
           </li>
-
         </ng-container>
 
-        <!-- ADMIN TALLER -->
         <ng-container *ngIf="usuario?.rol === 'ADMIN_TALLER'">
 
           <li class="nav-item">
-            <a class="nav-link" routerLink="/ordenes">
-              Ordenes
+            <a class="nav-link nav-link-custom" routerLink="/ordenes" routerLinkActive="active">
+              <i class="bi bi-clipboard-check me-1"></i> Ordenes
             </a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" routerLink="/tecnicos">
-              Tecnicos
+            <a class="nav-link nav-link-custom" routerLink="/tecnicos" routerLinkActive="active">
+              <i class="bi bi-people me-1"></i> Tecnicos
             </a>
           </li>
 
         </ng-container>
 
-        <!-- TECNICO -->
         <ng-container *ngIf="usuario?.rol === 'TECNICO'">
-
           <li class="nav-item">
-            <a class="nav-link" routerLink="/mis-ordenes">
-              Mis Ordenes
+            <a class="nav-link nav-link-custom" routerLink="/mis-ordenes" routerLinkActive="active">
+              <i class="bi bi-tools me-1"></i> Mis Ordenes
             </a>
           </li>
-
         </ng-container>
 
       </ul>
 
-      <span class="navbar-text me-3 text-light">
-        {{usuario?.nombre}}
-      </span>
+      <!-- USUARIO DROPDOWN -->
+      <div class="dropdown">
 
-      <button class="btn btn-light btn-sm" (click)="logout()">
-        Salir
-      </button>
+        <button 
+          class="btn btn-light d-flex align-items-center gap-2 px-3 py-1 dropdown-toggle"
+          data-bs-toggle="dropdown">
+
+          <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center"
+               style="width: 30px; height: 30px; font-size: 14px;">
+            {{usuario?.nombre?.charAt(0)}}
+          </div>
+
+          <span class="d-none d-lg-inline">{{usuario?.nombre}}</span>
+        </button>
+
+        <ul class="dropdown-menu dropdown-menu-end shadow">
+
+          <li class="dropdown-item-text small text-muted">
+            {{usuario?.rol}}
+          </li>
+
+          <li><hr class="dropdown-divider"></li>
+
+          <li>
+            <button class="dropdown-item text-danger" (click)="logout()">
+              <i class="bi bi-box-arrow-right me-2"></i> Cerrar sesión
+            </button>
+          </li>
+
+        </ul>
+
+      </div>
 
     </div>
 

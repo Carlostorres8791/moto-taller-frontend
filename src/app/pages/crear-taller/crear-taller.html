@@ -1,69 +1,147 @@
 <app-navbar></app-navbar>
 
-<div class="container mt-4">
-  <h2>Registrar Nuevo Taller</h2>
-  <h3>Ingresa los datos del nuevo Taller</h3>
+<div class="container py-4">
 
-  <form [formGroup]="form" (ngSubmit)="crearTaller()">
-    <div class="mb-3">
-      <label>Nombre del taller</label>
-      <input type="text" class="form-control" formControlName="nombreTaller"/>
-      <div *ngIf="campoInvalido('nombreTaller')" class="text-danger">El nombre debe de tener al menos 3 caracteres</div>
+  <div class="card shadow border-0">
+    
+    <!-- HEADER -->
+    <div class="card-header bg-primary text-white">
+      <h4 class="mb-0">Registrar Nuevo Taller</h4>
+      <small>Ingresa la información del taller y su administrador</small>
     </div>
 
-    <div class="mb-3">
-      <label>Dirección</label>
-      <input type="text" class="form-control" formControlName="direccion"/>
+    <div class="card-body">
 
-      <div *ngIf="campoInvalido('direccion')" class="text-danger">la direccion es obligatoria (mínimo 5 carcateres)</div>
+      <form [formGroup]="form" (ngSubmit)="crearTaller()">
+
+        <!-- DATOS DEL TALLER -->
+        <h5 class="mb-3">🏭 Datos del Taller</h5>
+
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Nombre del taller</label>
+            <input 
+              type="text" 
+              class="form-control"
+              [ngClass]="{'is-invalid': campoInvalido('nombreTaller')}"
+              formControlName="nombreTaller"/>
+
+            <div class="invalid-feedback">
+              Mínimo 3 caracteres
+            </div>
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Teléfono</label>
+            <input 
+              type="text" 
+              class="form-control"
+              [ngClass]="{'is-invalid': campoInvalido('telefono')}"
+              formControlName="telefono"/>
+
+            <div class="invalid-feedback">
+              Debe tener 10 dígitos
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Dirección</label>
+          <input 
+            type="text" 
+            class="form-control"
+            [ngClass]="{'is-invalid': campoInvalido('direccion')}"
+            formControlName="direccion"/>
+
+          <div class="invalid-feedback">
+            Mínimo 5 caracteres
+          </div>
+        </div>
+
+        <hr>
+
+        <!-- ADMIN -->
+        <h5 class="mb-3">👤 Administrador</h5>
+
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Nombre</label>
+            <input 
+              type="text" 
+              class="form-control"
+              [ngClass]="{'is-invalid': campoInvalido('nombreAdmin')}"
+              formControlName="nombreAdmin"/>
+
+            <div class="invalid-feedback">
+              Nombre inválido
+            </div>
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label class="form-label">Email</label>
+            <input 
+              type="email" 
+              class="form-control"
+              [ngClass]="{'is-invalid': campoInvalido('emailAdmin')}"
+              formControlName="emailAdmin"/>
+
+            <div class="invalid-feedback">
+              Email inválido
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Contraseña</label>
+          <input 
+            type="password" 
+            class="form-control"
+            [ngClass]="{'is-invalid': campoInvalido('passwordAdmin')}"
+            formControlName="passwordAdmin"/>
+
+          <div class="invalid-feedback">
+            Mínimo 6 caracteres
+          </div>
+        </div>
+
+        <!-- ERROR -->
+        <div *ngIf="errorMessage" class="alert alert-danger">
+          {{ errorMessage }}
+        </div>
+
+        <!-- BOTONES -->
+        <div class="d-flex flex-column flex-md-row gap-2 mt-3">
+
+          <button 
+            class="btn btn-success flex-fill"
+            type="submit"
+            [disabled]="form.invalid || loading">
+
+            <span *ngIf="!loading">
+              <i class="bi bi-check-lg me-1"></i> Crear Taller
+            </span>
+
+            <span *ngIf="loading">
+              <span class="spinner-border spinner-border-sm me-2"></span>
+              Creando...
+            </span>
+
+          </button>
+
+          <button 
+            class="btn btn-outline-secondary flex-fill"
+            routerLink="/listar-talleres">
+
+            <i class="bi bi-arrow-left me-1"></i> Volver
+
+          </button>
+
+        </div>
+
+      </form>
+
     </div>
 
-    <div class="mb-3">
-      <label>Teléfono</label>
-      <input type="text" class="form-control" formControlName="telefono"/>
+  </div>
 
-      <div *ngIf="campoInvalido('telefono')" class="text-danger">
-        el teléfono debe de tener 10 dígitos
-      </div>
-    </div>
-
-    <hr />
-
-    <h2>Registro del Administrador</h2>
-    <h3>Ingresa los datos del administrador del taller</h3>
-
-    <div class="mb-3">
-      <label>Nombre del Administrador</label>
-      <input type="text" class="form-control" formControlName="nombreAdmin" />
-      <div *ngIf="campoInvalido('nombreAdmin')" class="text-danger">
-        Nombre Invalido
-      </div>
-    </div>
-
-    <div class="mb-3">
-      <label>Email del Administrador</label>
-      <input type="email" class="form-control" formControlName="emailAdmin" />
-      <div *ngIf="campoInvalido('emailAdmin')"  class="text-danger">
-        Email Invalido
-      </div>
-    </div>
-
-    <div class="mb-3">
-      <label>Contraseña</label>
-      <input type="text" class="form-control" formControlName="passwordAdmin" />
-      <div *ngIf="campoInvalido('passwordAdmin')" class="text-danger">
-        Mínimo 6 caracteres
-      </div>
-    </div>
-
-    <div *ngIf="errorMessage" class="alert alert-danger">
-      {{ errorMessage }}
-    </div>
-
-    <button class="btn btn-success w-100" type="submit" [disabled]="form.invalid || loading">
-      {{ loading ? 'Creando...' : 'Crear Taller' }}
-    </button>
-    <hr>
-    <button class="btn btn-primary w-100" routerLink="/dashboard">Salir</button>
-  </form>
 </div>

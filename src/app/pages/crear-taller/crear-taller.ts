@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Taller } from '../../services/taller';
 import { Navbar } from '../../component/navbar/navbar';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-crear-taller',
@@ -15,11 +15,13 @@ export class CrearTaller implements OnInit {
   form!: FormGroup;
   loading = false;
   errorMessage = '';
+  tallerId: string | null = null;
 
   constructor(
     private fb: FormBuilder,
     private tallerService: Taller,
     private router: Router,
+    private route: ActivatedRoute,
   ) {}
 
   ngOnInit(): void {
@@ -31,6 +33,12 @@ export class CrearTaller implements OnInit {
       emailAdmin: ['', [Validators.required, Validators.email]],
       passwordAdmin: ['', [Validators.required, Validators.minLength(6)]],
     });
+
+    this.tallerId = this.route.snapshot.paramMap.get('id');
+
+    if (this.tallerId) {
+      this.cargarTaller(this.tallerId);
+    }
   }
 
   crearTaller(): void {
@@ -42,33 +50,72 @@ export class CrearTaller implements OnInit {
     this.loading = true;
     this.errorMessage = '';
 
-    this.tallerService.crearTaller(this.form.value).subscribe({
-      next: () => {
+    if (this.tallerId) {
+      this.tallerService.actualizarTaller(this.tallerId, this.form.value).subscribe({
+        next: () => {
+          this.loading = false;
+          alert('Taller actualizado correctamente');
+          this.router.navigate(['/listar-talleres']);
+        },
+        error: (err) => {
+          this.loading = false;
+          this.errorMessage = 'Error al actualizar el taller';
+        },
+      });
+
+      this.tallerService.crearTaller(this.form.value).subscribe({
+        next: () => {
+          this.loading = false;
+
+          alert('Taller creado correctamente');
+
+          this.form.reset();
+
+          //opcional: redirigir
+          this.router.navigate(['/dashboard']);
+        },
+
+        error: (err) => {
+          this.loading = false;
+
+          console.error(err);
+
+          //manejo de errores del backend
+          if (err.status === 400) {
+            this.errorMessage = 'Datos inválidos. Verifica la información.';
+          } else if (err.status === 409) {
+            this.errorMessage = 'El correo ya está registrado.';
+          } else if (err.status === 500) {
+            this.errorMessage = 'Error interno del servidor.';
+          } else {
+            this.errorMessage = 'Ocurrió un error inesperado.';
+          }
+        },
+      });
+    }
+  }
+
+  cargarTaller(id: string): void {
+    this.loading = true;
+
+    this.tallerService.obtenerPorId(id).subscribe({
+      next: (data: any) => {
         this.loading = false;
 
-        alert('Taller creado correctamente');
+        this.form.patchValue({
+          nombreTaller: data.nombre,
+          direccion: data.direccion,
+          telefono: data.telefono,
+          nombreAdmin: data.nombreAdmin,
+          emailAdmin: data.emailAdmin,
+        });
 
-        this.form.reset();
-
-        //opcional: redirigir
-        this.router.navigate(['/dashboard']);
+        this.form.get('passwordAdmin')?.clearValidators();
+        this.form.get('passwordAdmin')?.updateValueAndValidity();
       },
-
-      error: (err) => {
+      error: () => {
         this.loading = false;
-
-        console.error(err);
-
-        //manejo de errores del backend
-        if (err.status === 400) {
-          this.errorMessage = 'Datos inválidos. Verifica la información.';
-        } else if (err.status === 409) {
-          this.errorMessage = 'El correo ya está registrado.';
-        } else if (err.status === 500) {
-          this.errorMessage = 'Error interno del servidor.';
-        } else {
-          this.errorMessage = 'Ocurrió un error inesperado.';
-        }
+        this.errorMessage = 'Error al cargar el taller';
       },
     });
   }
