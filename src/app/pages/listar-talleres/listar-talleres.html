@@ -10,9 +10,15 @@
       <span class="text-muted small">Gestión de talleres registrados</span>
     </div>
 
-    <a routerLink="/crear-taller" class="btn btn-primary px-3">
-      <i class="bi bi-plus-lg me-1"></i> Nuevo Taller
-    </a>
+    <div class="d-flex gap-2">
+      <a routerLink="/dashboard" class="btn btn-outline-secondary">
+        <i class="bi bi-arrow-left me-1"></i> Volver
+      </a>
+
+      <a routerLink="/crear-taller" class="btn btn-primary px-3">
+        <i class="bi bi-plus-lg me-1"></i> Crear Taller
+      </a>
+    </div>
   </div>
 
   <!-- BUSCADOR -->
@@ -100,13 +106,13 @@
                 <i class="bi bi-pencil"></i>
               </button>
 
-              <button 
-              class="btn btn-sm"
-              [ngClass]="t.activo ? 'btn-outline-success' : 'btn-outline-danger'"
-              (click)="cambiarEstado(t)"
-              [title]="t.activo ? 'Desactivar' : 'Activar'"
+              <button
+                class="btn btn-sm"
+                [ngClass]="t.activo ? 'btn-outline-success' : 'btn-outline-danger'"
+                (click)="cambiarEstado(t)"
+                [title]="t.activo ? 'Desactivar' : 'Activar'"
               >
-                <i class="bi bi-power" [ngClass]="t.activo ?  'bi-power' : 'bi-check-circle'"></i>
+                <i class="bi bi-power" [ngClass]="t.activo ? 'bi-power' : 'bi-check-circle'"></i>
               </button>
             </td>
           </tr>
