@@ -59,12 +59,22 @@ export class ListarTalleres implements OnInit {
   }
   cambiarEstado(t: any) {
     if (t.activo) {
-      this.tallerService.desactivar(t.id).subscribe(() => {
-        t.activo = false;
+      this.tallerService.desactivar(t.id).subscribe({
+        next: () => {
+          t.activo = false;
+        },
+        error: () => {
+          this.errorMessage = 'Error al desactivar';
+        }
       });
-    } else {
-      this.tallerService.activar(t.id).subscribe(() => {
-        t.activo = true;
+    }else{
+      this.tallerService.activar(t.id).subscribe({
+        next: () => {
+          t.activo = true;
+        },
+        error: () => {
+          this.errorMessage = 'Error al activar';
+        }
       });
     }
   }
