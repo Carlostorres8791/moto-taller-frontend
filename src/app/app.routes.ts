@@ -4,6 +4,9 @@ import { Dashboard } from './pages/dashboard/dashboard';
 import { CrearTaller } from './pages/crear-taller/crear-taller';
 import { ListarTalleres } from './pages/listar-talleres/listar-talleres';
 import { EditarTaller } from './pages/editar-taller/editar-taller';
+import { Component } from '@angular/compiler';
+import { DashAdminTaller } from './pages/dashboard/dash-admin-taller/dash-admin-taller';
+import { DashRecepcion } from './pages/dashboard/dash-recepcion/dash-recepcion';
 
 export const routes: Routes = [
     { path: '', component: Login},
@@ -11,5 +14,7 @@ export const routes: Routes = [
     { path: 'dashboard', component: Dashboard},
     { path: 'crear-taller', component: CrearTaller},
     { path: 'listar-talleres', component: ListarTalleres},
-    { path: 'editar-taller/:id', component: EditarTaller}
+    { path: 'editar-taller/:id', component: EditarTaller},
+    { path: 'dash-admin-taller', component: DashAdminTaller},
+    { path: 'dash-recepcion', component: DashRecepcion} 
 ];

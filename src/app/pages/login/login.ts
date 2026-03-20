@@ -31,10 +31,21 @@ export class Login {
         const token = response.token;
 
         this.authService.guardarToken(token);
-
         this.authService.guardarUsuario(response);
 
-        this.router.navigate(['/dashboard']); 
+        const rol = response.rol;
+
+        if (rol === 'SUPER_ADMIN') {
+          this.router.navigate(['/dashboard']);          
+        } else if (rol === 'ADMIN_TALLER') {
+          this.router.navigate(['/dash-admin-taller']);
+        } else if (rol === 'RECEPCIONISTA') {
+          this.router.navigate(['/dash-recepcion']);          
+        } else if (rol == 'TECNICO') {
+          this.router.navigate(['/dash-tecnico']);                
+        } else {
+          this.router.navigate(['/dash-cliente'])
+        }       
       },
       error: (error) => {
         console.log("Error login", error);
