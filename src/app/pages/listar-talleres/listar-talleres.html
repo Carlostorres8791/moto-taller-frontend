@@ -1,10 +1,10 @@
 <app-navbar></app-navbar>
 
 <div class="container-fluid px-4 py-4">
-
   <!-- HEADER -->
-  <div class="d-flex flex-column flex-lg-row justify-content-between align-items-lg-center mb-4 gap-3">
-
+  <div
+    class="d-flex flex-column flex-lg-row justify-content-between align-items-lg-center mb-4 gap-3"
+  >
     <div>
       <h3 class="fw-bold mb-1">Listado de Talleres</h3>
       <span class="text-muted small">Gestión de talleres registrados</span>
@@ -13,32 +13,30 @@
     <a routerLink="/crear-taller" class="btn btn-primary px-3">
       <i class="bi bi-plus-lg me-1"></i> Nuevo Taller
     </a>
-
   </div>
 
   <!-- BUSCADOR -->
   <div class="card border-0 shadow-sm mb-3">
     <div class="card-body p-3">
-
       <div class="row g-2 align-items-center">
-
         <div class="col-md-6">
-          <input 
-            type="text" 
-            class="form-control" 
-            placeholder="🔎 Buscar por nombre, dirección o admin...">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="🔎 Buscar por nombre, dirección o admin..."
+            [(ngModel)]="searchTerm"
+            (input)="filtrar()"
+          />
         </div>
 
-        <div class="col-md-3">
+        <!--<div class="col-md-3">
           <select class="form-select">
             <option value="">Todos</option>
             <option value="activos">Activos</option>
             <option value="inactivos">Inactivos</option>
           </select>
-        </div>
-
+        </div>-->
       </div>
-
     </div>
   </div>
 
@@ -54,7 +52,6 @@
 
   <!-- TABLA -->
   <div class="card shadow-sm border-0" *ngIf="!loading && talleres.length > 0">
-
     <div class="card-header bg-white d-flex justify-content-between align-items-center">
       <span class="fw-semibold">Talleres registrados</span>
       <span class="badge bg-primary">{{ talleres.length }}</span>
@@ -62,7 +59,6 @@
 
     <div class="table-responsive">
       <table class="table table-hover align-middle mb-0">
-
         <thead class="table-light">
           <tr>
             <th>#</th>
@@ -75,8 +71,7 @@
         </thead>
 
         <tbody>
-          <tr *ngFor="let t of talleres; let i = index">
-
+          <tr *ngFor="let t of talleresFiltrados; let i = index">
             <td class="text-muted">{{ i + 1 }}</td>
 
             <td>
@@ -97,36 +92,30 @@
             </td>
 
             <td class="text-end">
-
-              <button class="btn btn-sm btn-outline-primary me-2" title="Editar" [routerLink]="['/editar-taller', t.id]">
+              <button
+                class="btn btn-sm btn-outline-primary me-2"
+                title="Editar"
+                [routerLink]="['/editar-taller', t.id]"
+              >
                 <i class="bi bi-pencil"></i>
               </button>
 
               <button class="btn btn-sm btn-outline-danger" title="Activar/Desactivar">
                 <i class="bi bi-power"></i>
               </button>
-
             </td>
-
           </tr>
         </tbody>
-
       </table>
     </div>
-
   </div>
 
   <!-- VACÍO -->
   <div *ngIf="!loading && talleres.length === 0" class="text-center mt-5">
-
     <i class="bi bi-inbox fs-1 text-muted"></i>
 
     <p class="text-muted mt-2">No hay talleres registrados</p>
 
-    <a routerLink="/crear-taller" class="btn btn-primary btn-sm">
-      Crear primer taller
-    </a>
-
+    <a routerLink="/crear-taller" class="btn btn-primary btn-sm"> Crear primer taller </a>
   </div>
-
 </div>

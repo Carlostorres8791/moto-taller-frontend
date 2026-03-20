@@ -3,18 +3,23 @@ import { Component, OnInit } from '@angular/core';
 import { Navbar } from '../../component/navbar/navbar';
 import { Taller } from '../../services/taller';
 import { RouterLink, RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-listar-talleres',
-  imports: [CommonModule, Navbar, RouterLink],
+  imports: [FormsModule, CommonModule, Navbar, RouterLink],
   templateUrl: './listar-talleres.html',
   styleUrl: './listar-talleres.css',
 })
-export class ListarTalleres implements OnInit{
-
+export class ListarTalleres implements OnInit {
   talleres: any[] = [];
+  talleresFiltrados: any[] = [];
+
   loading = true;
   errorMessage = '';
+
+  searchTerm: string = '';
+  filtroEstado: string = '';
 
   constructor(private tallerService: Taller) {}
 
@@ -26,16 +31,41 @@ export class ListarTalleres implements OnInit{
     this.loading = true;
 
     this.tallerService.obtenerTalleres().subscribe({
-      next: (data)=> {
+      next: (data) => {
         this.talleres = data;
+        this.talleresFiltrados = data;
         this.loading = false;
       },
-      error: (err)=> {
+      error: (err) => {
         console.error(err);
         this.errorMessage = 'Error al cargar talleres';
         this.loading = false;
-      }
+      },
     });
   }
 
+  filtrar() {
+    this.talleresFiltrados = this.talleres.filter((t) => {
+      const matchTexto =
+        t.nombre?.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+        t.direccion?.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+        t.nombreAdmin?.toLowerCase().includes(this.searchTerm.toLowerCase());
+
+      const matchEstado =
+        this.filtroEstado === '' ? true : this.filtroEstado === 'activos' ? t.activo : !t.activo;
+
+      return matchTexto && matchEstado;
+    });
+  }
+  cambiarEstado(t: any) {
+    if (t.activo) {
+      this.tallerService.desactivar(t.id).subscribe(() => {
+        t.activo = false;
+      });
+    } else {
+      this.tallerService.activar(t.id).subscribe(() => {
+        t.activo = true;
+      });
+    }
+  }
 }
