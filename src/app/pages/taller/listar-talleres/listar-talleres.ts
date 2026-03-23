@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { Navbar } from '../../component/navbar/navbar';
-import { Taller } from '../../services/taller';
 import { RouterLink, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { Navbar } from '../../../component/navbar/navbar';
+import { Taller } from '../../../services/taller';
 
 @Component({
   selector: 'app-listar-talleres',

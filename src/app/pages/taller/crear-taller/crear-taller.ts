@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Taller } from '../../services/taller';
-import { Navbar } from '../../component/navbar/navbar';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { Taller } from '../../../services/taller';
+import { Navbar } from '../../../component/navbar/navbar';
 
 @Component({
   selector: 'app-crear-taller',
